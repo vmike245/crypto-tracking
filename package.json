@@ -1,0 +1,19 @@
+{
+  "name": "shapeshift-exercise",
+  "version": "0.0.0",
+  "description": "Coding exercise for shapeshift.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmike245/crypto-tracking.git"
+  },
+  "author": "michaelv245@yahoo.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vmike245/crypto-tracking/issues"
+  },
+  "homepage": "https://github.com/vmike245/crypto-tracking#readme"
+}

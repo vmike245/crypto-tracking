@@ -11,9 +11,15 @@
 // }
 
 
-module.exports = {
-  getData : () => new Promise((resolve, reject) => resolve(require('../mockData/bittrex'))),
-  transform : (data) => {
+module.exports = class Bittrex {
+  constructor(fromCurrency, toCurrency) {
+    this.fromCurrency = fromCurrency;
+    this.toCurrency = toCurrency;
+  }
+  getData() {
+    return new Promise((resolve, reject) => resolve(require('../mockData/bittrex')))
+  }
+  transform(data) {
     const baseObject = {
       exchange : 'Bittrex',
       buy : {},

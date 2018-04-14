@@ -1,8 +1,14 @@
 `use strict`;
 
-module.exports = {
-  getData : () => new Promise((resolve, reject) => resolve(require('../mockData/poloniex'))),
-  transform : (data) => {
+module.exports = class Poloniex {
+  constructor (fromCurrency, toCurrency) {
+    this.fromCurrency = fromCurrency;
+    this.toCurrency = toCurrency;
+  }
+  getData() {
+    return new Promise((resolve, reject) => resolve(require('../mockData/poloniex')))
+  }
+  transform(data) {
     const baseObject = {
       exchange : 'Poloniex',
       buy : {},

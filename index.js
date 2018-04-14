@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const orderBooks = require('./orderBooks');
+const portNumber = 3000
 
 app.get('/getOrderBooks', ({ query: { from, to }}, res) => {
   orderBooks(from, to)
@@ -10,4 +11,4 @@ app.get('/getOrderBooks', ({ query: { from, to }}, res) => {
     .catch( error => console.error('IT FAILED'))
 })
 
-app.listen(3000, () => console.log('Web Server Started on port 3000'))
+app.listen(portNumber, () => console.log(`Web Server Started on port ${portNumber}`))

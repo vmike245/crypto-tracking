@@ -1,4 +1,5 @@
 `use strict`;
+const request = require('request-promise-native');
 
 // const baseObject = {
 //   exchange: String;
@@ -17,7 +18,24 @@ module.exports = class Bittrex {
     this.toCurrency = toCurrency;
   }
   getData() {
-    return new Promise((resolve, reject) => resolve(require('../mockData/bittrex')))
+    return request({
+      uri: `https://bittrex.com/api/v1.1/public/getorderbook?market=${this.fromCurrency}-${this.toCurrency}&type=both`,
+      json: true
+    })
+    .then( response => {
+      if (!response.success) {
+        throw new Error('Request Failed to Bittrex');
+      }
+      return response;
+    })
+    .catch( error => {
+      return {
+        result : {
+          buy: [],
+          sell: []
+        }
+      };
+    })
   }
   transform(data) {
     const baseObject = {

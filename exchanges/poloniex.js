@@ -1,4 +1,5 @@
 `use strict`;
+const request = require('request-promise-native')
 
 module.exports = class Poloniex {
   constructor (fromCurrency, toCurrency) {
@@ -6,7 +7,22 @@ module.exports = class Poloniex {
     this.toCurrency = toCurrency;
   }
   getData() {
-    return new Promise((resolve, reject) => resolve(require('../mockData/poloniex')))
+    return request({
+      uri: `https://poloniex.com/public?command=returnOrderBook&currencyPair=${this.fromCurrency}_${this.toCurrency}&depth=1000`,
+      json: true
+    })
+    .then( response => {
+      if (response.error) {
+        throw new Error('Request Failed to Poloniex');
+      }
+      return response;
+    })
+    .catch( error => {
+      return {
+        asks : [],
+        bids : []
+      };
+    })
   }
   transform(data) {
     const baseObject = {
@@ -14,10 +30,10 @@ module.exports = class Poloniex {
       buy : {},
       sell : {}
     };
-    data.asks.forEach(buyOrder => {
+    data.bids.forEach(buyOrder => {
       baseObject.buy[Number(buyOrder[0])] = buyOrder[1];
     });
-    data.bids.forEach(sellOrder => {
+    data.asks.forEach(sellOrder => {
       baseObject.sell[Number(sellOrder[0])] = sellOrder[1];
     });
     return baseObject;

@@ -11,4 +11,8 @@ app.get('/getOrderBooks', ({ query: { from, to }}, res) => {
     .catch( error => console.error('IT FAILED'))
 })
 
+// Create link to Angular build directory
+var distDir = __dirname + "/src/";
+app.use(express.static(distDir));
+
 app.listen(portNumber, () => console.log(`Web Server Started on port ${portNumber}`))

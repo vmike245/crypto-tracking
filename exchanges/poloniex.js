@@ -8,7 +8,7 @@ module.exports = class Poloniex {
   }
   getData() {
     return request({
-      uri: `https://poloniex.com/public?command=returnOrderBook&currencyPair=${this.fromCurrency}_${this.toCurrency}&depth=1000`,
+      uri: `https://poloniex.com/public?command=returnOrderBook&currencyPair=${this.fromCurrency}_${this.toCurrency}&depth=100`,
       json: true
     })
     .then( response => {

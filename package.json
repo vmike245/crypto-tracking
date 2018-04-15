@@ -17,6 +17,9 @@
     "url": "https://github.com/vmike245/crypto-tracking/issues"
   },
   "homepage": "https://github.com/vmike245/crypto-tracking#readme",
+  "engines": {
+    "node": "8.10.0"
+  },
   "dependencies": {
     "express": "^4.16.3",
     "request": "^2.85.0",

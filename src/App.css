@@ -1,0 +1,9 @@
+.tables {
+  display: flex;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.tables table {
+  text-align: right;
+}

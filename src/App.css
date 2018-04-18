@@ -6,3 +6,7 @@
 .currencySelectors > *:not(:last-child) {
   margin-right: 0.5rem
 }
+
+.errorMessage {
+  margin-top: 2rem;
+}

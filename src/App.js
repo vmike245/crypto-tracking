@@ -215,10 +215,10 @@ class App extends Component {
     request({
       uri: `https://thawing-sands-84142.herokuapp.com/getOrderBooks?from=${from}&to=${to}`,
       json: true
-    }).then( response => {
+    }).then( ({ buy, sell }) => {
       this.setState({
-        buy: response.buy,
-        sell: response.sell
+        buy: Object.keys(buy).length !== 0 ? buy : null,
+        sell: Object.keys(sell).length !== 0 ? buy : null
       })
     })
   }
@@ -235,6 +235,8 @@ class App extends Component {
     this.getOrderBook(this.state.fromCurrency, target.value)
   }
 
+
+
   renderTables = () => {
     if (this.state.buy && this.state.sell) {
       return (
@@ -245,7 +247,7 @@ class App extends Component {
       )
     }
     return (
-      <div>
+      <div className="errorMessage">
         The exchange of {this.state.fromCurrency} to {this.state.toCurrency} is currently not available
       </div>
     )

@@ -3,18 +3,17 @@ import './App.css';
 import CurrencySelect from './components/CurrencySelect';
 import RatesTable from './components/RatesTable';
 import * as request from 'request-promise-native';
-const currencies = [
-  "1ST",
+
+const fromOptions = ["BTC", "ETH", "USDT"]
+const toOptions = [
   "2GIVE",
   "ABY",
   "ADA",
   "ADT",
   "ADX",
   "AEON",
-  "AGRS",
   "AMP",
   "ANT",
-  "APX",
   "ARDR",
   "ARK",
   "AUR",
@@ -24,7 +23,6 @@ const currencies = [
   "BCPT",
   "BCY",
   "BITB",
-  "BITCNY",
   "BLITZ",
   "BLK",
   "BLOCK",
@@ -32,20 +30,14 @@ const currencies = [
   "BRK",
   "BRX",
   "BSD",
-  "BTC",
-  "BTCD",
-  "BTCP",
   "BTG",
-  "BTS",
   "BURST",
   "BYC",
   "CANN",
   "CFI",
   "CLAM",
   "CLOAK",
-  "CLUB",
   "COVAL",
-  "CPC",
   "CRB",
   "CRW",
   "CURE",
@@ -54,7 +46,6 @@ const currencies = [
   "DCR",
   "DCT",
   "DGB",
-  "DGD",
   "DMD",
   "DMT",
   "DNT",
@@ -75,17 +66,14 @@ const currencies = [
   "ETH",
   "EXCL",
   "EXP",
-  "FAIR",
   "FCT",
   "FLDC",
   "FLO",
   "FTC",
-  "FUN",
   "GAM",
   "GAME",
   "GBG",
   "GBYTE",
-  "GCR",
   "GEO",
   "GLD",
   "GNO",
@@ -97,7 +85,6 @@ const currencies = [
   "HMQ",
   "IGNIS",
   "INCNT",
-  "INFX",
   "IOC",
   "ION",
   "IOP",
@@ -110,17 +97,14 @@ const currencies = [
   "LSK",
   "LTC",
   "LUN",
-  "MAID",
   "MANA",
   "MCO",
   "MEME",
   "MER",
   "MLN",
   "MONA",
-  "MTL",
   "MUE",
   "MUSIC",
-  "MYST",
   "NAV",
   "NBT",
   "NEO",
@@ -135,17 +119,14 @@ const currencies = [
   "OMNI",
   "PART",
   "PAY",
-  "PDC",
   "PINK",
   "PIVX",
-  "PKB",
   "POLY",
   "POT",
   "POWR",
   "PPC",
   "PTC",
   "PTOY",
-  "PXI",
   "QRL",
   "QTUM",
   "QWARK",
@@ -154,10 +135,8 @@ const currencies = [
   "RCN",
   "RDD",
   "REP",
-  "RISE",
   "RLC",
   "RVR",
-  "SAFEX",
   "SALT",
   "SBD",
   "SC",
@@ -166,13 +145,11 @@ const currencies = [
   "SIB",
   "SLR",
   "SLS",
-  "SNGLS",
   "SNRG",
   "SNT",
   "SPHR",
   "SPR",
   "SRN",
-  "START",
   "STEEM",
   "STORJ",
   "STRAT",
@@ -181,11 +158,8 @@ const currencies = [
   "SYNX",
   "SYS",
   "THC",
-  "TIME",
   "TIX",
-  "TKN",
   "TKS",
-  "TRIG",
   "TRST",
   "TRUST",
   "TRX",
@@ -195,7 +169,6 @@ const currencies = [
   "UKG",
   "UNB",
   "UP",
-  "USDT",
   "VEE",
   "VIA",
   "VIB",
@@ -223,7 +196,8 @@ const currencies = [
   "ZCL",
   "ZEC",
   "ZEN",
-  "ZRX"
+  "ZRX",
+  "BTC"
 ]
 
 class App extends Component {
@@ -264,9 +238,9 @@ class App extends Component {
     return (
       <div id="body">
         <div className="currencySelectors">
-          <CurrencySelect currentValue={this.state.fromCurrency} onChange={this.changeFromCurrency} options={currencies}/>
+          <CurrencySelect currentValue={this.state.fromCurrency} onChange={this.changeFromCurrency} options={fromOptions}/>
           <span> to </span>
-          <CurrencySelect currentValue={this.state.toCurrency} onChange={this.changeToCurrency} options={currencies}/>
+          <CurrencySelect currentValue={this.state.toCurrency} onChange={this.changeToCurrency} options={toOptions}/>
         </div>
         <div className="tables">
           <RatesTable tableClassName="buy" tableName="Buy" ratesObject={this.state.buy}/>

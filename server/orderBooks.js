@@ -1,6 +1,6 @@
 `use strict`;
-const bittrexConstructor = require('./exchanges/bittrex');
-const poloniexConstructor = require('./exchanges/poloniex');
+const bittrex = require('./exchanges/bittrex');
+const poloniex = require('./exchanges/poloniex');
 // const totals = {
 //   buy: {
 //     [rate]: {
@@ -49,20 +49,12 @@ const populateTotalsFromResponse = (totals, { buy, sell, exchange }) => {
 }
 
 const getOrderBook = (fromCurrency, toCurrency) => {
-  const bittrex = new bittrexConstructor(fromCurrency, toCurrency);
-  const poloniex = new poloniexConstructor(fromCurrency, toCurrency);
   
   const exchanges = [
     bittrex,
     poloniex
   ];
-  return Promise.all(exchanges.map( exchange => {
-    return exchange.getData()
-      .then( response => {
-        return exchange.transform(response);
-      })
-      .catch( error => console.log(error));
-  }))
+  return Promise.all(exchanges.map( exchange => exchange.getOrderBook(fromCurrency, toCurrency)))
     .then((responses) => {
       const unsortedTotals = {
         buy: {},

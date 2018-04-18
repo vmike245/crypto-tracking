@@ -1,9 +1,8 @@
-.tables {
+.currencySelectors {
+  margin-top: 0.75rem;
   display: flex;
-  max-height: 80vh;
-  overflow: auto;
+  justify-content: center;
 }
-
-.tables table {
-  text-align: right;
+.currencySelectors > *:not(:last-child) {
+  margin-right: 0.5rem
 }

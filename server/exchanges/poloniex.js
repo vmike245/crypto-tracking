@@ -1,21 +1,28 @@
 `use strict`;
 const request = require('request-promise-native')
 
-module.exports = class Poloniex {
-  constructor (fromCurrency, toCurrency) {
-    this.fromCurrency = fromCurrency;
-    this.toCurrency = toCurrency;
-  }
-  getData() {
+module.exports = {
+  getOrderBook: (fromCurrency, toCurrency) => {
     return request({
-      uri: `https://poloniex.com/public?command=returnOrderBook&currencyPair=${this.fromCurrency}_${this.toCurrency}&depth=100`,
+      uri: `https://poloniex.com/public?command=returnOrderBook&currencyPair=${fromCurrency}_${toCurrency}&depth=100`,
       json: true
     })
     .then( response => {
       if (response.error) {
         throw new Error('Request Failed to Poloniex');
       }
-      return response;
+      const baseObject = {
+        exchange : 'Poloniex',
+        buy : {},
+        sell : {}
+      };
+      response.bids.forEach(buyOrder => {
+        baseObject.buy[Number(buyOrder[0])] = buyOrder[1];
+      });
+      response.asks.forEach(sellOrder => {
+        baseObject.sell[Number(sellOrder[0])] = sellOrder[1];
+      });
+      return baseObject;
     })
     .catch( error => {
       return {
@@ -23,19 +30,5 @@ module.exports = class Poloniex {
         bids : []
       };
     })
-  }
-  transform(data) {
-    const baseObject = {
-      exchange : 'Poloniex',
-      buy : {},
-      sell : {}
-    };
-    data.bids.forEach(buyOrder => {
-      baseObject.buy[Number(buyOrder[0])] = buyOrder[1];
-    });
-    data.asks.forEach(sellOrder => {
-      baseObject.sell[Number(sellOrder[0])] = sellOrder[1];
-    });
-    return baseObject;
   }
 }

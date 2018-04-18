@@ -1,0 +1,29 @@
+.tables {
+  display: flex;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.tables :first-child {
+  margin-right: 1rem;
+}
+
+.table td, .table th {
+  padding: 0.25rem;
+}
+
+.table {
+  background-color: hsl(0, 0%, 62%);
+  text-align: left;
+  border-radius: 4px;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: hsl(0, 0%, 43%);
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

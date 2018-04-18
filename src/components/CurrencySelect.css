@@ -1,0 +1,11 @@
+.currencySelect {
+  background-color: hsl(212, 30%, 48%);
+  color: hsl(0, 0%, 97%);
+  border-color: hsl(212, 30%, 48%);
+  border-radius: 2px;
+}
+
+.currencySelect option {
+  background-color: hsl(0, 0%, 97%);;;
+  color: initial;
+}

@@ -259,7 +259,7 @@ class App extends Component {
           <span> to </span>
           <CurrencySelect currentValue={this.state.toCurrency} onChange={this.changeToCurrency} options={toOptions}/>
         </div>
-        {renderTables()}
+        {this.renderTables()}
 
       </div>
     );

@@ -37,10 +37,9 @@ module.exports = {
     })
     .catch( error => {
       return {
-        result : {
-          buy: [],
-          sell: []
-        }
+        exchange : 'Bittrex',
+        buy : {},
+        sell : {}
       };
     })
   }

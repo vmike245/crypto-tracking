@@ -26,8 +26,9 @@ module.exports = {
     })
     .catch( error => {
       return {
-        asks : [],
-        bids : []
+        exchange : 'Poloniex',
+        buy : {},
+        sell : {}
       };
     })
   }

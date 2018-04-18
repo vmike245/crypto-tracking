@@ -30,23 +30,39 @@ const setQuantityForRates = ({ totals, transactionType, rates, transactionMap, e
 
 const populateTotalsFromResponse = (totals, { buy, sell, exchange }) => {
   const buyRates = Object.keys(buy);
+  if (buyRates.length) {
+    setQuantityForRates({
+      totals,
+      transactionType: 'buy',
+      rates: buyRates,
+      transactionMap: buy,
+      exchangeName: exchange
+    });
+  }
   const sellRates = Object.keys(sell);
-  setQuantityForRates({
-    totals,
-    transactionType: 'buy',
-    rates: buyRates,
-    transactionMap: buy,
-    exchangeName: exchange
-  });
-  setQuantityForRates({
-    totals,
-    transactionType: 'sell',
-    rates: sellRates,
-    transactionMap: sell,
-    exchangeName: exchange
-  });
+  if (sellRates.length) {
+    setQuantityForRates({
+      totals,
+      transactionType: 'sell',
+      rates: sellRates,
+      transactionMap: sell,
+      exchangeName: exchange
+    });
+  }
 
 }
+
+const sortRates = (rates) => {
+  const ratesArray = Object.keys(rates);
+  if (ratesArray.length === 0) {
+    return {}
+  } 
+  ratesArray.sort();
+  const sortedRates = {};
+  ratesArray.forEach( rate => sortedRates[rate] = rates[rate])
+  return sortedRates;
+}
+
 
 const getOrderBook = (fromCurrency, toCurrency) => {
   
@@ -60,21 +76,15 @@ const getOrderBook = (fromCurrency, toCurrency) => {
         buy: {},
         sell: {}
       };
-      const totals = {
-        buy: {},
-        sell: {}
-      };
       responses.forEach((response) => {
+        console.log(response);
         populateTotalsFromResponse(unsortedTotals, response);
       });
-      const buyRates = Object.keys(unsortedTotals.buy);
-      const sellRates = Object.keys(unsortedTotals.sell);
-      buyRates.sort();
-      buyRates.forEach( buyRate => totals.buy[buyRate] = unsortedTotals.buy[buyRate])
-  
-      sellRates.sort();
-      sellRates.forEach( sellRate => totals.sell[sellRate] = unsortedTotals.sell[sellRate])
-      return totals;
+
+      return {
+        buy: sortRates(unsortedTotals.buy),
+        sell: sortRates(unsortedTotals.sell)
+      };
     })
     .catch( error => console.log(error));
 }

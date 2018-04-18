@@ -234,6 +234,23 @@ class App extends Component {
     })
     this.getOrderBook(this.state.fromCurrency, target.value)
   }
+
+  renderTables = () => {
+    if (this.state.buy && this.state.sell) {
+      return (
+        <div className="tables">
+          <RatesTable tableClassName="buy" tableName="Buy" ratesObject={this.state.buy}/>
+          <RatesTable tableClassName="sell" tableName="Sell" ratesObject={this.state.sell}/>
+        </div>
+      )
+    }
+    return (
+      <div>
+        The exchange of {this.state.fromCurrency} to {this.state.toCurrency} is currently not available
+      </div>
+    )
+
+  }
   render() {
     return (
       <div id="body">
@@ -242,10 +259,8 @@ class App extends Component {
           <span> to </span>
           <CurrencySelect currentValue={this.state.toCurrency} onChange={this.changeToCurrency} options={toOptions}/>
         </div>
-        <div className="tables">
-          <RatesTable tableClassName="buy" tableName="Buy" ratesObject={this.state.buy}/>
-          <RatesTable tableClassName="sell" tableName="Sell" ratesObject={this.state.sell}/>
-        </div>
+        {renderTables()}
+
       </div>
     );
   }

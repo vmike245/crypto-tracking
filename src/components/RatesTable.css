@@ -3,9 +3,6 @@
   overflow: auto;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.tables :first-child {
   margin-right: 1rem;
 }
 

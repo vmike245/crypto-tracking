@@ -268,7 +268,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div id="body">
+      <div>
         <div className="currencySelectors">
           <CurrencySelect currentValue={this.state.fromCurrency} onChange={this.changeFromCurrency} options={fromOptions}/>
           <span> to </span>

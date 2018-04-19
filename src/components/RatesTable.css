@@ -11,6 +11,7 @@
 
 .table td, .table th {
   padding: 0.25rem;
+  white-space: nowrap;
 }
 
 .table {

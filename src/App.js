@@ -205,7 +205,7 @@ class App extends Component {
     super(props);
     this.state = {
       fromCurrency: "BTC",
-      toCurrency:"ETH"
+      toCurrency:"ETH",
     };
   }
   componentDidMount() {
@@ -214,13 +214,17 @@ class App extends Component {
   getOrderBook = (from, to) => {
     const address = 'https://thawing-sands-84142.herokuapp.com';
     // const address = 'http://localhost:3000';
+    this.setState({
+      isLoading: true
+    })
     request({
       uri: `${address}/getOrderBooks?from=${from}&to=${to}`,
       json: true
     }).then( ({ buy, sell }) => {
       this.setState({
         buy: Object.keys(buy).length !== 0 ? buy : null,
-        sell: Object.keys(sell).length !== 0 ? buy : null
+        sell: Object.keys(sell).length !== 0 ? buy : null,
+        isLoading: false
       })
     })
   }
@@ -240,6 +244,13 @@ class App extends Component {
 
 
   renderTables = () => {
+    if (this.state.isLoading) {
+      return (
+        <div className="loadingMessage">
+          Loading...
+        </div>
+      )
+    }
     if (this.state.buy && this.state.sell) {
       return (
         <div className="tables">
@@ -250,7 +261,7 @@ class App extends Component {
     }
     return (
       <div className="errorMessage">
-        The exchange of {this.state.fromCurrency} to {this.state.toCurrency} is currently not available
+        The order book for {this.state.fromCurrency} to {this.state.toCurrency} is currently not available
       </div>
     )
 

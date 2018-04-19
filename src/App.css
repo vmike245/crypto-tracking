@@ -7,6 +7,6 @@
   margin-right: 0.5rem
 }
 
-.errorMessage {
+.errorMessage, .loadingMessage {
   margin-top: 2rem;
 }

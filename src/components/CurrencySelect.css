@@ -9,5 +9,5 @@
 
 .currencySelect option {
   background-color: hsl(0, 0%, 97%);
-  color: initial;
+  color: hsl(0, 0%, 0%);
 }

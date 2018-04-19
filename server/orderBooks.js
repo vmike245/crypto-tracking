@@ -77,7 +77,6 @@ const getOrderBook = (fromCurrency, toCurrency) => {
         sell: {}
       };
       responses.forEach((response) => {
-        console.log(response);
         populateTotalsFromResponse(unsortedTotals, response);
       });
 

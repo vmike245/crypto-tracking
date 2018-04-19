@@ -212,8 +212,10 @@ class App extends Component {
     this.getOrderBook(this.state.fromCurrency, this.state.toCurrency)
   }
   getOrderBook = (from, to) => {
+    const address = 'https://thawing-sands-84142.herokuapp.com';
+    // const address = 'http://localhost:3000';
     request({
-      uri: `https://thawing-sands-84142.herokuapp.com/getOrderBooks?from=${from}&to=${to}`,
+      uri: `${address}/getOrderBooks?from=${from}&to=${to}`,
       json: true
     }).then( ({ buy, sell }) => {
       this.setState({

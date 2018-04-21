@@ -3,7 +3,6 @@
   overflow: auto;
   flex-wrap: wrap;
   justify-content: center;
-  margin-right: 1rem;
 }
 
 .table td, .table th {
@@ -20,6 +19,7 @@
   max-height: 80vh;
   box-shadow: 2px 2px 8px hsl(0, 0%, 58%);
   margin-bottom: 1rem;
+  margin-right: 1rem;
 }
 
 .table tbody tr:nth-child(odd) {

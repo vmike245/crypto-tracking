@@ -223,7 +223,7 @@ class App extends Component {
     }).then( ({ buy, sell }) => {
       this.setState({
         buy: Object.keys(buy).length !== 0 ? buy : null,
-        sell: Object.keys(sell).length !== 0 ? buy : null,
+        sell: Object.keys(sell).length !== 0 ? sell : null,
         isLoading: false
       })
     })
